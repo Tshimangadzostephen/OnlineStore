@@ -1,0 +1,30 @@
+<div class="modal-overlay" *ngIf="isVisible">
+  <div class="modal-content">
+    <h3>Order Details</h3>
+    <p><strong>Order Number:</strong> {{ orderDetails.orderNumber }}</p>
+    <p><strong>Date:</strong> {{ formatDate(orderDetails.date) }}</p>
+    <p><strong>Status:</strong> {{ orderDetails.status }}</p>
+
+    <h4>Products Bought</h4>
+    <table class="details-table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Unit(s)</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderDetails.items">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.units }}</td>
+          <td>R{{ item.product.price }}</td>
+          <td>R{{ item.product.price * item.units }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>

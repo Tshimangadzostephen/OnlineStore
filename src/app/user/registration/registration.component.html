@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register & Login</title>
+    <style>
+
+    .form-container{
+        background-color: #fff;
+        font-family: 'Titillium Web', sans-serif;
+        font-size: 0;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px -15px rgba(0, 0, 0, 0.3);
+    }
+    .form-container .title{
+        color: #000;
+        font-size: 25px;
+        font-weight: 600;
+        text-transform: capitalize;
+        margin: 0 0 25px;
+    }
+    .form-container .active:after{
+        content: '';
+        background-color: #00A9EF;
+        height: 3px;
+        width: 60px;
+        margin: 10px 0 0;
+        display: block;
+        clear: both;
+    }
+
+    .tab-content {
+    padding-top: 20px; /* Adjust the value as needed */
+    }
+
+    .form-container .sub-title{
+        color: #333;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+    }
+    .form-container .form-horizontal{ font-size: 0; }
+    .form-container .form-horizontal .form-group{
+        color: #333;
+        width: 50%;
+        padding: 0 8px;
+        margin: 0 0 15px;
+        display: inline-block;
+    }
+    .form-container .form-horizontal .form-group:nth-child(4){ margin-bottom: 30px; }
+    .form-container .form-horizontal .form-group label{
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .form-container .form-horizontal .form-control{
+        color: #888;
+        background: #fff;
+        font-weight: 400;
+        letter-spacing: 1px;
+        height: 40px;
+        padding: 6px 12px;
+        border-radius: 10px;
+        border: 2px solid #e7e7e7;
+        box-shadow: none;
+    }
+    .form-container .form-horizontal .form-control:focus{ box-shadow: 0 0 5px #dcdcdc; }
+    .form-container .form-horizontal .check-terms{
+        padding: 0 8px;
+        margin: 0 0 25px;
+    }
+    .form-container .form-horizontal .check-terms .check-label{
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+        font-style: italic;
+        vertical-align: top;
+        display: inline-block;
+    }
+    .form-container .form-horizontal .check-terms .checkbox{
+        height: 17px;
+        width: 17px;
+        min-height: auto;
+        margin: 2px 8px 0 0;
+        border: 2px solid #d9d9d9;
+        border-radius: 2px;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        transition: all 0.3s ease 0s;
+    }
+    .form-container .form-horizontal .check-terms .checkbox:before{
+        content: '';
+        height: 5px;
+        width: 9px;
+        border-bottom: 2px solid #00A9EF;
+        border-left: 2px solid #00A9EF;
+        transform: rotate(-45deg);
+        position: absolute;
+        left: 2px;
+        top: 2.5px;
+        transition: all 0.3s ease;
+    }
+    .form-container .form-horizontal .check-terms .checkbox:checked:before{ opacity: 1; }
+    .form-container .form-horizontal .check-terms .checkbox:not(:checked):before{ opacity: 0; }
+    .form-container .form-horizontal .check-terms .checkbox:focus{ outline: none; }
+    .form-container .signin-link{
+        color: #333;
+        font-size: 14px;
+        width: calc(100% - 190px);
+        margin-right: 30px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .small{
+      font-size: 10px !important;
+      color: red !important;
+      padding: 8px;
+    }
+
+    .form-container .form-horizontal .signup{
+        color: #fff;
+        background: #00A9EF;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: fit-content;
+        padding: 8px 15px 9px;
+        border-radius: 10px;
+        transition: all 0.3s ease 0s;
+    }
+    .form-container .form-horizontal .login-button{
+        color: #fff;
+        background: #00A9EF;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 160px;
+        padding: 8px 15px 9px;
+        border-radius: 10px;
+        transition: all 0.3s ease 0s;
+    }
+    .form-container .form-horizontal .btn:hover,
+    .form-container .form-horizontal .btn:focus{
+        text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        box-shadow: 3px 3px rgba(0,0,0,0.15),5px 5px rgba(0,0,0,0.1);
+        outline: none;
+    }
+    @media only screen and (max-width:479px){
+        .form-container .form-horizontal .form-group{ width: 100%; }
+        .form-container .signin-link{
+            width: 100%;
+            margin: 0 10px 15px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container" style="padding:50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="myTab" role="list">
+                        <li class="nav-item">
+                            <h5 class="nav-link active title" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="true">Register</h5>
+                        </li>
+                        <li class="nav-item">
+                            <h5 class="nav-link title" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="false">Login</h5>
+                        </li>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <form [formGroup]="userService.formModel" class="form-horizontal" (submit)="onSubmit()">
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" placeholder="Name" formControlName="Name">
+                                        <label class="small" *ngIf="userService.formModel.get('Name')?.touched && userService.formModel.get('Name')?.errors?.['required']">Name Required</label>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" class="form-control" placeholder="Email Address" formControlName="EmailAddress">
+                                        <label class="small" *ngIf="userService.formModel.get('EmailAddress')?.touched && userService.formModel.get('EmailAddress')?.errors?.['email']">Enter valid email</label>
+                                    </div>
+                                </div>
+                                <div class="form-row" formGroupName="Passwords">
+                                    <div class="col-md-6 form-group">
+                                        <label>Password</label>
+                                        <input type="password" id="Password" class="form-control" placeholder="Password" formControlName="Password">
+                                        <label class="small" *ngIf="userService.formModel.get('Passwords.Password')?.touched && userService.formModel.get('Passwords.Password')?.errors?.['required']">Password Required</label>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Confirm Password</label>
+                                        <input type="password" id="PasswordConfirm" class="form-control" placeholder="Confirm Password" formControlName="PasswordConfirm">
+                                        <label class="small" *ngIf="userService.formModel.get('Passwords.PasswordConfirm')?.touched && userService.formModel.get('Passwords.PasswordConfirm')?.errors?.['required']">Field Required</label>
+                                        <label class="small" *ngIf="userService.formModel.get('Passwords.PasswordConfirm')?.touched && userService.formModel.get('Passwords.PasswordConfirm')?.errors?.['pwdMisMatch']">
+                                          Password Mismatch
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn signup" [disabled]="!userService.formModel.valid">Create Account</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <form #form="ngForm" class="form-horizontal" (ngSubmit)="onLoginSubmit(form)">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input [(ngModel)]="loginModel.UserName" name="UserName" type="text" class="form-control" placeholder="User Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input [(ngModel)]="loginModel.Password" name="Password" type="password" class="form-control" placeholder="Password" required>
+                                </div>
+                                <button type="submit" class="btn login-button" [disabled]="form.invalid">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

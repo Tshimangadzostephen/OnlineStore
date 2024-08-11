@@ -1,0 +1,137 @@
+<app-home></app-home>
+<!--THE PRODUCTS-->
+<style>
+  .btn-black {
+    background-color: #00A9EF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+  }
+
+  .quantity-selector {
+    width: 100px; /* Adjust width as needed */
+  }
+
+  .cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width:fit-content;
+    height: 100%;
+    background: #f8f9fa;
+    border-left: 1px solid #dee2e6;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 4rem;
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .cart-table th, .cart-table td {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .cart-table th {
+    text-align: left;
+    background-color: #f1f1f1;
+  }
+
+  .cart-table .actions button {
+    background-color: #d62929;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  .cart-table .actions button.btn-update {
+    background-color: #23a0d5;
+  }
+
+  .btn-checkout {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .card{
+    margin-top: 2rem;
+  }
+</style>
+
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div *ngFor="let product of products" class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="card">
+          <img [src]="product.image" class="card-img-top" alt="{{product.name}}" />
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+              <h5 class="mb-0">{{ product.name }}</h5>
+              <h5 class="text-dark mb-0">R{{ product.price }}</h5>
+            </div>
+            <div class="space d-flex justify-content-between align-items-center mb-2">
+              <p class="text-muted mb-0">Available: {{ product.unit }}</p>
+              <div class="input-group quantity-selector">
+                <input type="number" [ngModel]="selectedUnits[product.id] || 0" class="form-control" name="unit"
+                  [min]="0" [max]="10" step="1" aria-label="unit selector"
+                  (ngModelChange)="onUnitChange(product, $event)">
+              </div>
+            </div>
+            <button class="btn btn-black w-100" (click)="addToCart(product)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cart">
+  <h4>Cart</h4>
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Unit(s)</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart">
+        <td>{{ item.product.name }}</td>
+        <td>
+          <input type="number" [ngModel]="item.units" (ngModelChange)="updateCartItem(item.product, $event)"
+                 [min]="1" [max]="10" aria-label="Cart item quantity">
+        </td>
+        <td>R{{ item.product.price }}</td>
+        <td>R{{ item.product.price * item.units }}</td>
+        <td class="actions">
+          <!-- <button class="btn btn-update" (click)="updateCartItem(item.product, item.units)">
+            <i class="fa fa-refresh"></i>
+          </button> -->
+          <button class="btn btn-remove" (click)="removeFromCart(item.product)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button *ngIf="cart.length > 0" class="btn-checkout" (click)="checkout()">Checkout</button>
+</div>

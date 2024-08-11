@@ -1,0 +1,57 @@
+<app-home></app-home>
+
+<style>
+ .orders-table {
+  width: 80%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+}
+
+.orders-table th, .orders-table td {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+}
+
+.orders-table th {
+  text-align: left;
+  background-color: #f1f1f1;
+}
+
+.orders-table button {
+  background-color:  #23a0d5;
+  color:#f4f4f4;
+  border: none;
+  height: 1cm;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 25px;
+  padding: 0 20px;
+}
+
+</style>
+<table class="orders-table">
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderNumber }}</td>
+      <td>{{ order.date | date:'short' }}</td>
+      <td class="bdg">{{ order.status }}</td>
+      <td>
+        <button (click)="viewOrder(order.orderNumber)">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-order-details-modal [orderDetails]="selectedOrder" [isVisible]="isModalVisible" (close)="closeModal()"></app-order-details-modal>
+

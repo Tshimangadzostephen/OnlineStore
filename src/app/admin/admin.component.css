@@ -1,0 +1,117 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 5rem;
+}
+
+.product-form {
+  margin-bottom: 2rem;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.table {
+  margin-top: 2rem;
+}
+
+table img {
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table td:last-child {
+  text-align: center;
+}
+
+.btn {
+  margin-right: 0.5rem;
+}
+
+h3 {
+  text-align: center;
+}
+
+.custom-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.custom-file-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-file-label {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: center;
+}
+
+.custom-heading {
+  font-size: 1.25rem !important; /* Adjust the size to what you expect from display-6 */
+  font-weight: 300 !important;   /* Optional: Adjust the weight to match the look */
+  text-align: left;   /* Aligns the text to the left */
+  margin-left: 0;     /* Ensures it starts at the same point as the table */
+}
+
+.custom-file-label::after {
+  content: "Browse";
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.custom-file-input:focus + .custom-file-label {
+  background-color: #e9ecef;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-file-input:focus + .custom-file-label::after {
+  background-color: #0056b3;
+}

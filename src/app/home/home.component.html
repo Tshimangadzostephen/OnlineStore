@@ -1,0 +1,52 @@
+<style>
+  .btn-black {
+    background-color: #00A9EF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.btn-rounded {
+    border-radius: 25px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-link {
+  color: black;
+  font-size: 1rem; /* Equivalent to display-6 */
+  font-weight: 100; /* Adjust if needed */
+  line-height: 1.2; /* Adjust if needed */
+}
+
+.nav-link:hover{
+  color: #00A9EF;
+}
+
+</style>
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand text-dark display-4" routerLink="/shop">ONLINE STORE</a>
+  <header>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin" *ngIf="isRestrictedUser">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/orders" *ngIf="!isRestrictedUser || currentUser ==='vendor1@OnlineStore.com'">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shop" *ngIf="!isRestrictedUser">Shop</a>
+      </li>
+    </ul>
+  </header>
+  <button class="btn-black btn-rounded" (click)="onLogout()">LOGOUT</button>
+</nav>
+<router-outlet></router-outlet>
+
+

@@ -1,0 +1,101 @@
+<app-home></app-home>
+<div class="container">
+  <!-- Product Form -->
+   <p>Logged in as: {{Role}}</p>
+   <br>
+  <form
+    [formGroup]="productForm"
+    (ngSubmit)="editingProduct ? updateProduct() : createProduct()"
+    class="product-form"
+  >
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="name">Product Name</label>
+          <input id="name" formControlName="name" class="form-control" [readonly]="isReadonly"/>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input id="price" type="number" formControlName="price" class="form-control" />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="unit">Unit</label>
+          <input id="unit" type="number" formControlName="unit" class="form-control" />
+        </div>
+      </div>
+      <div class="col" *ngIf="currentUser === 'ProductManager@OnlineStore.com' || currentUser === 'ProductCapturer@OnlineStore.com'">
+        <div class="form-group">
+          <label for="image">Upload Image</label>
+          <input type="file" (change)="onImageUpload($event)" class="form-control-file"/>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">
+      {{ editingProduct ? 'Update Product' : 'Create Product' }}
+    </button>
+  </form>
+  <!-- <th >Actions</th> -->
+
+<!-- Pending Products Table -->
+<div class="container mt-5">
+  <h3 class="mt-5 display-6 custom-heading text-left">Pending Products</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Unit(s)</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of pendingProducts">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency: 'ZAR':'symbol':'1.2-2' }}
+        <td>{{ product.unit }}</td>
+        <td>{{ product.status}}</td>
+        <td>
+          <button class="btn btn-success btn-sm" (click)="approveProduct(product)" *ngIf="currentUser === 'ProductManager@OnlineStore.com'">Approve</button>
+          <button class="btn btn-warning btn-sm" (click)="editProduct(product)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Approved Products Table -->
+<div class="container mt-5" *ngIf="currentUser === 'ProductManager@OnlineStore.com' || currentUser === 'ProductCapturer@OnlineStore.com'">
+  <h3 class="display-6 mt-5 custom-heading text-left">Approved Products</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Unit(s)</th>
+        <th *ngIf="currentUser === 'ProductManager@OnlineStore.com'">Actions</th>
+        <th *ngIf="currentUser === 'ProductCapturer@OnlineStore.com'">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of approvedProducts">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency: 'ZAR':'symbol':'1.2-2' }}
+        <td>{{ product.unit }}</td>
+        <td *ngIf="currentUser === 'ProductCapturer@OnlineStore.com'">{{product.status}}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editProduct(product)" *ngIf="currentUser === 'ProductManager@OnlineStore.com'">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)" *ngIf="currentUser === 'ProductManager@OnlineStore.com'">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+

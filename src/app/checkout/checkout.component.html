@@ -1,0 +1,68 @@
+<app-home></app-home>
+
+<style>
+  /* Ensure the body uses full height */
+  body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    /* justify-content: center; Center vertically */
+    min-height: 100vh; /* Full viewport height */
+  }
+
+  .cart-table {
+    width: fit-content;
+    border-collapse: collapse; /* Collapse borders */
+  }
+
+  .cart-table th, .cart-table td {
+    padding: 10px;
+    border: 1px solid #dee2e6; /* Add border to td and th */
+  }
+
+  .cart-table th {
+    text-align: left;
+    background-color: #f1f1f1;
+  }
+
+  .heading {
+    margin-bottom: 1rem;
+    font-size: 1.5rem; /* Adjust font size */
+    margin-top: 5rem;
+  }
+
+  .p {
+    margin-top: 1rem;
+    font-size: 1.2rem; /* Adjust font size */
+  }
+</style>
+
+<div class="container">
+  <h2 class="heading">Receipt</h2>
+  <p>This is a summary of the items you bought</p>
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Unit(s)</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart">
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.units }}</td>
+        <td>R{{ item.product.price }}</td>
+        <td>R{{ item.product.price * item.units }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="p"><strong>Total: R{{ totalAmount }}</strong></p>
+</div>
