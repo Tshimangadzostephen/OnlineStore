@@ -24,11 +24,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          check-latest: true
+          cache: 'npm'
 
-      - name: Override PATH
+      - name: Check Node.js and npm versions
         run: |
-          echo "::add-path::$(npm bin)"
           node -v
           npm -v
 
