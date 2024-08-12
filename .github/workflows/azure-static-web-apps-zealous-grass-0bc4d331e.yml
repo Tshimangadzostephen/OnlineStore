@@ -20,11 +20,12 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20' # Ensure Node.js v20 is used
-          cache: 'npm' # Cache npm dependencies
+      - name: Set Node.js version using NVM
+        run: |
+          nvm install 20
+          nvm use 20
+          node -v # Check node version
+          npm -v  # Check npm version
 
       - name: Install dependencies
         run: npm install
@@ -39,12 +40,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_GRASS_0BC4D331E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "angular.json#$.projects[*].architect.build.options.outputPath" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
