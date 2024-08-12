@@ -20,12 +20,11 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Set Node.js version using NVM
-        run: |
-          nvm install 20
-          nvm use 20
-          node -v # Check node version
-          npm -v  # Check npm version
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          check-latest: true
 
       - name: Install dependencies
         run: npm install
